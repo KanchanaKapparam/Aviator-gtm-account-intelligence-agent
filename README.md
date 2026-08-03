@@ -19,7 +19,7 @@ This project analyzes public GitHub organization signals, engineering blogs, and
 
 ## Generated Outreach Email
 
-![Uploading image.png…]()
+<img width="773" height="787" alt="image" src="https://github.com/user-attachments/assets/b0c4918f-4892-42c1-ba4b-59ee529013bf" />
 
 ---
 # ✨ Features
