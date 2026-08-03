@@ -11,8 +11,8 @@ This project analyzes public GitHub organization signals, engineering blogs, and
 # 📸 Demo
 
 ## Dashboard
-<img width="687" height="807" alt="image" src="https://github.com/user-attachments/assets/72760a12-7379-461e-b4d2-fb08d805b4de" />
 
+<img width="1242" height="830" alt="image" src="https://github.com/user-attachments/assets/427f630d-f60b-4b16-869a-9cb69ac5b884" />
 
 
 ---
