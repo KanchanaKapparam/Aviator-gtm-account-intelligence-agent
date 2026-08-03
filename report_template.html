@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviator GTM Account Intelligence & Outreach</title>
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --panel-bg: rgba(17, 24, 39, 0.7);
+            --panel-border: rgba(255, 255, 255, 0.08);
+            --primary: #6366f1; /* Indigo */
+            --primary-hover: #4f46e5;
+            --accent: #a855f7; /* Purple */
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-dark: #6b7280;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
+        }
+
+        header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--panel-border);
+            background: rgba(17, 24, 39, 0.4);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .header-logo h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            background: linear-gradient(to right, #ffffff, #d1d5db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-badge {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: #818cf8;
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            padding: 1.5rem;
+            gap: 1.5rem;
+            height: calc(100vh - 65px);
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            flex-shrink: 0;
+        }
+
+        .sidebar-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-dark);
+            font-weight: 600;
+            padding-left: 0.5rem;
+        }
+
+        .company-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            overflow-y: auto;
+        }
+
+        .company-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .company-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: transparent;
+            transition: background-color 0.3s;
+        }
+
+        .company-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .company-card.active {
+            border-color: rgba(99, 102, 241, 0.5);
+            background: rgba(99, 102, 241, 0.08);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.1);
+        }
+
+        .company-card.active::before {
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+        }
+
+        .company-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .company-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .company-domain {
+            font-size: 0.8rem;
+            color: var(--text-dark);
+        }
+
+        .fit-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.375rem;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .fit-badge.high {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .fit-badge.medium {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .fit-badge.low {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .company-meta-brief {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Detail Panel */
+        .detail-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .detail-view {
+            display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .detail-view.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            backdrop-filter: blur(12px);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .stat-subtext {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Reasoning Block */
+        .reasoning-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(168, 85, 247, 0.08) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: relative;
+        }
+
+        .reasoning-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #818cf8;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .reasoning-text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-main);
+        }
+
+        /* Main Workspace split */
+        .workspace-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1100px) {
+            .workspace-split {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                height: auto;
+                overflow: visible;
+            }
+        }
+
+        /* Left Side Panels: Blogs & Jobs */
+        .signals-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .section-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            backdrop-filter: blur(12px);
+        }
+
+        .section-header {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+            border-bottom: 1px solid var(--panel-border);
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-badge {
+            font-size: 0.7rem;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+        }
+
+        .signal-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .signal-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 0.5rem;
+            padding: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            transition: background 0.2s;
+        }
+
+        .signal-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .signal-title {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .signal-title:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .signal-snippet {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .no-signals {
+            font-size: 0.8rem;
+            color: var(--text-dark);
+            font-style: italic;
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+
+        /* Right Side: Outreach Editor */
+        .outreach-panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .editor-header {
+            padding: 1rem 1.25rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid var(--panel-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .editor-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .editor-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            background: var(--success);
+            border-radius: 50%;
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            padding: 0.45rem 0.85rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .copy-btn:active {
+            transform: scale(0.97);
+        }
+
+        .email-content-box {
+            padding: 1.5rem;
+            flex: 1;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #d1d5db;
+            background: rgba(0, 0, 0, 0.2);
+            white-space: pre-wrap;
+            overflow-y: auto;
+            min-height: 350px;
+        }
+
+        .placeholder-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 3rem;
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 0.75rem;
+            color: var(--text-dark);
+            height: 100%;
+        }
+
+        .placeholder-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Scrollbar customization */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-logo">
+            <div class="logo-icon">A</div>
+            <div>
+                <h1>Aviator GTM Account Intelligence</h1>
+            </div>
+        </div>
+        <div class="header-badge">Outreach Generator</div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar: Leads list -->
+        <div class="sidebar">
+            <h2 class="sidebar-title">Target Accounts</h2>
+            <ul class="company-list">
+                {% for lead in leads %}
+                <li class="company-card {% if loop.first %}active{% endif %}" onclick="selectCompany('{{ lead.name | replace("'", "\\'") }}')">
+                    <div class="company-card-header">
+                        <span class="company-name">{{ lead.name }}</span>
+                        <span class="fit-badge {{ lead.fit_score | lower }}">{{ lead.fit_score }}</span>
+                    </div>
+                    <span class="company-domain">{{ lead.domain }}</span>
+                    <div class="company-meta-brief">
+                        <span>GitHub Org: {{ lead.github_org }}</span>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Details view container -->
+        <div class="detail-container">
+            {% for lead in leads %}
+            <div id="detail-{{ lead.name }}" class="detail-view {% if loop.first %}active{% endif %}">
+                
+                <!-- General statistics -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-label">Company Domain</span>
+                        <span class="stat-value" style="font-size: 1.15rem; word-break: break-all; margin-top: 0.4rem;">{{ lead.domain }}</span>
+                        <span class="stat-subtext"><a href="https://{{ lead.domain }}" target="_blank" style="color: var(--primary); text-decoration: none;">Visit Site &rarr;</a></span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">GitHub Public Repos</span>
+                        <span class="stat-value">{{ lead.public_repos }}</span>
+                        <span class="stat-subtext">github.com/{{ lead.github_org }}</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Top Languages</span>
+                        <span class="stat-value" style="font-size: 1.1rem; margin-top: 0.4rem;">
+                            {% if lead.top_languages %}
+                                {{ lead.top_languages }}
+                            {% else %}
+                                Unknown
+                            {% endif %}
+                        </span>
+                        <span class="stat-subtext">Determined from org repo activity</span>
+                    </div>
+                </div>
+
+                <!-- AI Fit Reasoning -->
+                <div class="reasoning-box">
+                    <div class="reasoning-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        Why Aviator Fit (DevEx Reasoning)
+                    </div>
+                    <p class="reasoning-text">{{ lead.fit_reasoning }}</p>
+                </div>
+
+                <!-- Main split workspace -->
+                <div class="workspace-split">
+                    <!-- Left: Scraped signals -->
+                    <div class="signals-panel">
+                        <!-- Blogs section -->
+                        <div class="section-box">
+                            <div class="section-header">
+                                <span>Engineering Blogs / Articles</span>
+                                <span class="section-badge">{{ lead.scraped_blogs | length }} Found</span>
+                            </div>
+                            <div class="signal-list">
+                                {% if lead.scraped_blogs %}
+                                    {% for blog in lead.scraped_blogs %}
+                                    <div class="signal-item">
+                                        <a href="{{ blog.href }}" target="_blank" class="signal-title">
+                                            {{ blog.title }}
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                                        </a>
+                                        <p class="signal-snippet">{{ blog.body }}</p>
+                                    </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="no-signals">No specific engineering blog posts found.</div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Jobs section -->
+                        <div class="section-box">
+                            <div class="section-header">
+                                <span>Active DevEx / Platform Job Openings</span>
+                                <span class="section-badge">{{ lead.scraped_jobs | length }} Found</span>
+                            </div>
+                            <div class="signal-list">
+                                {% if lead.scraped_jobs %}
+                                    {% for job in lead.scraped_jobs %}
+                                    <div class="signal-item">
+                                        <a href="{{ job.href }}" target="_blank" class="signal-title">
+                                            {{ job.title }}
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                                        </a>
+                                        <p class="signal-snippet">{{ job.body }}</p>
+                                    </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="no-signals">No relevant active job openings identified.</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Personalized Email outreach -->
+                    <div class="outreach-panel">
+                        <div class="editor-header">
+                            <div class="editor-title">
+                                <div class="editor-dot"></div>
+                                Generated Outreach
+                            </div>
+                            <button class="copy-btn" onclick="copyEmailText('{{ lead.name | replace("'", "\\'") }}')">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                <span id="copy-text-{{ lead.name }}">Copy Email</span>
+                            </button>
+                        </div>
+                        <div class="email-content-box" id="email-{{ lead.name }}">{{ lead.personalized_email }}</div>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        function selectCompany(name) {
+            // Update sidebar active class
+            const cards = document.querySelectorAll('.company-card');
+            cards.forEach(card => {
+                const cardName = card.querySelector('.company-name').innerText;
+                if (cardName === name) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+
+            // Update details view visibility
+            const detailViews = document.querySelectorAll('.detail-view');
+            detailViews.forEach(view => {
+                if (view.id === 'detail-' + name) {
+                    view.classList.add('active');
+                } else {
+                    view.classList.remove('active');
+                }
+            });
+        }
+
+        async function copyEmailText(name) {
+            const emailBox = document.getElementById('email-' + name);
+            const copyTextSpan = document.getElementById('copy-text-' + name);
+            
+            try {
+                await navigator.clipboard.writeText(emailBox.innerText);
+                copyTextSpan.innerText = 'Copied!';
+                copyTextSpan.parentElement.style.backgroundColor = 'var(--success)';
+                
+                setTimeout(() => {
+                    copyTextSpan.innerText = 'Copy Email';
+                    copyTextSpan.parentElement.style.backgroundColor = 'var(--primary)';
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+            }
+        }
+    </script>
+</body>
+</html>

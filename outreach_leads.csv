@@ -1,0 +1,43 @@
+name,domain,github_org,public_repos,top_languages,fit_score,fit_reasoning,personalized_email
+Vercel,vercel.com,vercel,238,"TypeScript, JavaScript, Python, Rust, Go",High,"Vercel maintains massive, high-throughput public monorepos like Next.js and the AI SDK, utilizing a complex multi-language stack of TypeScript, Rust, and Go. Coordinating merges and maintaining green builds across thousands of active contributors introduces major CI/CD bottlenecks, making them prime candidates for Aviator's MergeQueue to automate parallel queue verification and reduce merge lag.","Subject: Next.js CI queues & merge coordination
+
+Hi there,
+
+With Vercel maintaining massive, fast-moving monorepos like Next.js and your AI SDK across TypeScript, Rust, and Go, keeping your main branch green without blocking developer velocity must be a constant balancing act.
+
+At scale, standard GitHub merge queues often struggle, leading to long CI wait times, flaky test failures, and annoying merge conflicts. We built Aviator's MergeQueue to solve this for high-throughput teams. It coordinates parallel queue verification, batches PRs to optimize runner costs, and automatically reruns suspected flaky tests so developers don't get blocked.
+
+Are you currently facing long CI queues or merge conflict bottlenecks on your core repos? I'd love to share a quick benchmark on how we help scale monorepo pipelines.
+
+Best,
+
+[Your Name]
+GTM Engineer, Aviator"
+Supabase,supabase.com,supabase,164,"TypeScript, Rust, Python, Nix, PLpgSQL",High,"Supabase manages a highly active ecosystem with over 164 repositories, including a massive, high-throughput monorepo spanning TypeScript, Rust, Python, and Nix. With thousands of developers contributing, preventing merge conflicts, avoiding broken main branches, and optimizing CI/CD pipeline queues are critical DevEx challenges where Aviator’s MergeQueue and FlexReview can drive immediate efficiency.","Subject: Scaling CI & eliminating flaky merges at Supabase?
+
+Hi there,
+
+I was looking through the main `supabase` repo and your CLI tooling. Managing a highly active, polyglot codebase combining TypeScript, Rust, and Nix is incredibly impressive, but I imagine keeping CI green without stalling developer velocity is a constant battle.
+
+At Aviator, we build developer workflow automation. Our **MergeQueue** automatically coordinates pre-merge tests and runs queue verification to prevent broken builds and merge conflicts, which is especially useful for complex, multi-language codebases like yours. We also use **FlexReview** to intelligently route PRs to the right engineers based on code changes.
+
+Are you currently experiencing any bottlenecks with CI queue times or manual rebasing on your core repos? I'd love to share a quick benchmark of how we help teams with similar throughput scale their DevEx.
+
+Best,
+
+[Your Name]
+GTM Engineer, Aviator"
+PostHog,posthog.com,posthog,360,"TypeScript, Python, Go, Dart, Kotlin",High,"PostHog maintains an incredibly active, massive monorepo combining TypeScript, Python, and Go, alongside downstream repos like posthog-foss. Given their high-velocity development and public contribution model, they likely face severe bottlenecks around CI runtimes, merge conflicts, and PR review routing that Aviator's MergeQueue and FlexReview are uniquely positioned to solve.","Subject: Scaling PostHog's CI queue without the merge conflicts
+
+Hi there,
+
+With 37k+ stars on your main posthog repo, managing high-velocity PRs across TypeScript, Python, and Go—while keeping posthog-foss synced automatically—must keep your DevEx pipeline incredibly busy.
+
+At your scale, keeping master green without developer friction gets tough. Aviator MergeQueue automates queue verification and serializes merges, preventing broken builds and eliminating manual rebases and merge conflicts. We also offer FlexReview to contextually route PRs and speed up approval cycles.
+
+Are you currently seeing bottlenecks with CI queue backlogs or PR turnaround times at PostHog? Happy to share a quick benchmark on how we help similar high-scale monorepos.
+
+Best,
+
+[Your Name]
+GTM Engineer, Aviator"

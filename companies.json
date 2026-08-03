@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Vercel",
+    "domain": "vercel.com",
+    "github_org": "vercel"
+  },
+  {
+    "name": "Supabase",
+    "domain": "supabase.com",
+    "github_org": "supabase"
+  },
+  {
+    "name": "PostHog",
+    "domain": "posthog.com",
+    "github_org": "posthog"
+  }
+]
